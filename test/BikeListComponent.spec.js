@@ -20,7 +20,7 @@ describe('<BikeListComponent/>', function() {
   });
 
   it('Renders a div that contains a BikeComponent and calls _constructBikeList', function() {
-    sinon.spy(BikeListComponent.prototype, '_constructBikesList');
+    sinon.spy(BikeListComponent.prototype, '_constructBikeList');
 
     wrapper.setState({
       bikesList: [
@@ -32,7 +32,7 @@ describe('<BikeListComponent/>', function() {
     });
 
     expect(wrapper.find('.bikes-list')).to.have.length(1);
-    expect(BikesListComponent.prototype._constructBikesList.calledOnce).to.equal(true);
+    expect(BikeListComponent.prototype._constructBikeList.calledOnce).to.equal(true);
   });
 
   it('_constructBikesList works correctly and can handle multiple bikeComponent objects', function() {
@@ -48,7 +48,7 @@ describe('<BikeListComponent/>', function() {
         }
       ]
     });
-    const result = wrapper.instance()._constructBikesList();
+    const result = wrapper.instance()._constructBikeList();
     expect(result).to.be.instanceof(Array);
     expect(result.length).to.equal(2);
     expect(mount(result[0]).type()).to.equal(BikeComponent);
