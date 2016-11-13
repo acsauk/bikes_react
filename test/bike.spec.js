@@ -2,11 +2,11 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {expect} from 'chai';
 
-import Bike from '../lib/bike';
+import BikeComponent from '../lib/BikeComponent';
 
-describe('<Bike/>', function () {
+describe('<BikeComponent/>', function () {
   it('should display a bike name and description wrapped in paragraphs in a parent div', function() {
-    const wrapper = shallow(<Bike
+    const wrapper = shallow(<BikeComponent
                               bikeName={ 'Litening C:68' }
                               bikeDescription={ 'The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.' } />);
     expect(wrapper.type()).to.equal('div');
