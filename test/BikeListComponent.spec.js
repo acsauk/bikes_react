@@ -3,6 +3,7 @@ import { mount, shallow } from 'enzyme';
 import {expect} from 'chai';
 
 import BikeListComponent from '../lib/BikeListComponent';
+import BikeComponent from '../lib/BikeComponent';
 
 describe('<BikeListComponent/>', function() {
 
