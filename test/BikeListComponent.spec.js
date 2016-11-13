@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
+import nock from 'nock';
 
 import BikeListComponent from '../lib/BikeListComponent';
 import BikeComponent from '../lib/BikeComponent';
@@ -57,5 +58,24 @@ describe('<BikeListComponent/>', function() {
     expect(mount(result[1]).type()).to.equal(BikeComponent);
     expect(result[1].props.bikeName).to.equal('Litening C:62');
     expect(result[1].props.bikeDescription).to.equal('A lightweight, dream bike for ambitious cyclists with a high-quality C:62 carbon frame.');
+  });
+
+  it('Updates state with bike info after making AJAX call to server', function(done) {
+    nock('http://www.mocky.io/v2/577fb8a1100000c80762fcb3')
+      .get('items')
+      .reply(200, [
+        {"name": "Litening C:68",
+			   "description": "The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry."
+        }
+      ]);
+    wrapper = mount(<BikeListComponent/>);
+    setTimeout(function() {
+      expect(wrapper.state().bikesList).to.be.instanceof(Array);
+      expect(wrapper.state().bikesList.length).to.equal(1);
+      expect(wrapper.state().bikesList[0].bikeName).to.equal("Litening C:68");
+      expect(wrapper.state().bikesList[0].bikeDescription).to.equal("The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.");
+      nock.cleanAll();
+      done();
+    }, 1500);
   });
 });
