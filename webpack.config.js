@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 // env
-const buildDirectory = './dist/';
+const buildDirectory = './dist';
 
 module.exports = {
   entry: './lib/Main.js',
