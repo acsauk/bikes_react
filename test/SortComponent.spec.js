@@ -15,8 +15,9 @@ describe('<FilterComponent />', function() {
   })
 
   it('renders a dropdown box initially not populated', function() {
+    let dropdown = wrapper.find('.mui-dropdown')
     expect(wrapper.state().bikeClasses).to.be.instanceof(Array);
     expect(wrapper.state().bikeClasses.length).to.equal(0);
-    expect(wrapper.contains(<Dropdown />)).to.equal(true);
+    expect(dropdown.type()).to.equal('div');
   });
 });
