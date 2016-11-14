@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: path.resolve(buildDirectory),
     filename: 'app.js',
-    publicPath: 'http://localhost:7700/dist',
+    publicPath: '/',
   },
   externals: {
     'cheerio': 'window',
