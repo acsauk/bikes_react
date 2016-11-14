@@ -9,9 +9,10 @@ let wrapper;
 describe('<BikeComponent/>', function () {
   beforeEach(function() {
     wrapper = shallow(<BikeComponent
+                              bikeId={ 1 }
                               bikeName={ 'Litening C:68' }
                               bikeDescription={ 'The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.' }
-                              bikeClass={ ["endurance", "race"] }/>);
+                              bikeClasses={ ["endurance", "race"] }/>);
   });
 
   it('should display a bike name and description wrapped in paragraphs in a parent div', function() {
@@ -29,10 +30,12 @@ describe('<BikeComponent/>', function () {
     expect(descriptionP.text()).to.equal('Description: The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.');
   });
 
-  it('displays the bike classes associated with the bike in a paragraph tag', function() {
-    let classP = wrapper.childAt(2);
-    expect(classP.type()).to.equal('p');
+  it('displays the bike classes associated with the bike in a ul tag', function() {
+    let classP = wrapper.childAt(3);
+    expect(classP.type()).to.equal('ul');
     expect(classP.hasClass('bikeClass')).to.equal(true);
-    expect(classP.text()).to.equal('Classes: Endurance, Race');
+    expect(classP.find('ul').children()).to.have.length(2);
+    expect(classP.find('ul').childAt(0).text()).to.equal('endurance ')
+    expect(classP.find('ul').childAt(1).text()).to.equal('race ')
   });
 });
