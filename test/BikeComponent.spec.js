@@ -46,6 +46,5 @@ describe('<BikeComponent/>', function () {
     let image = imageImg.find('img');
     expect(imageImg.type()).to.equal('img');
     expect(imageImg.hasClass('bikeImage')).to.equal(true);
-    expect(image.text()).to.equal("https://www.cube.eu/typo3temp/_processed_/csm_780500_overview_35318ff11c.png")
   });
 });
