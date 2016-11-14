@@ -63,7 +63,6 @@ describe('<BikeListComponent/>', function() {
        large: 'https://www.cube.eu/typo3temp/_processed_/csm_750000_light_b752848746.jpg' },
     class: [ 'comfort' ] } ]
 
-
     wrapper = mount(<BikeListComponent/>);
   });
 
