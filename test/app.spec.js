@@ -2,14 +2,14 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
+import nock from 'nock';
 
-import BikeListComponent from '../lib/BikeListComponent';
-import BikeComponent from '../lib/BikeComponent';
+import App from '../lib/app';
 
 let wrapper;
 let bikesResponse;
 
-describe('<BikeListComponent/>', function() {
+describe('<App/>', function() {
   beforeEach(function() {
     bikesResponse = [
   { id: 1,
@@ -63,33 +63,18 @@ describe('<BikeListComponent/>', function() {
     class: [ 'comfort' ] } ]
   });
 
-  it('renders empty list initially and state contains an empty array in bikesList', function() {
-    wrapper = mount(<BikeListComponent bikeList={[]}/>);
-    expect(wrapper.props().bikeList).to.be.instanceof(Array);
-    expect(wrapper.props().bikeList.length).to.equal(0);
-    expect(wrapper.html()).to.equal('<div class="bikes-list"><h2>Bikes</h2></div>');
-  });
-
-  it('Renders a div that contains a BikeComponent and calls _constructBikeList', function() {
-    sinon.spy(BikeListComponent.prototype, '_constructBikeList');
-
-    wrapper = mount(<BikeListComponent bikeList={ bikesResponse }/>)
-
-    expect(wrapper.find('.bikes-list')).to.have.length(1);
-    expect(BikeListComponent.prototype._constructBikeList.calledOnce).to.equal(true);
-  });
-
-  it('_constructBikesList works correctly and can handle multiple bikeComponent objects', function() {
-    wrapper = mount(<BikeListComponent bikeList={ bikesResponse }/>)
-
-    const result = wrapper.instance()._constructBikeList();
-    expect(result).to.be.instanceof(Array);
-    expect(result.length).to.equal(7);
-    expect(mount(result[0]).type()).to.equal(BikeComponent);
-    expect(result[0].props.bikeName).to.equal('Litening C:68');
-    expect(result[0].props.bikeDescription).to.equal('The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.');
-    expect(mount(result[1]).type()).to.equal(BikeComponent);
-    expect(result[1].props.bikeName).to.equal('Litening C:62');
-    expect(result[1].props.bikeDescription).to.equal('A lightweight, dream bike for ambitious cyclists with a high-quality C:62 carbon frame.');
+  it('Updates state with bike info after making AJAX call to server', function(done) {
+    wrapper = mount(<App />);
+    nock('https://api.myjson.com')
+      .get('/bins/1c104')
+      .reply(200, bikesResponse);
+    setTimeout(function() {
+      expect(wrapper.state().bikeList).to.be.instanceof(Array);
+      expect(wrapper.state().bikeList.length).to.equal(7);
+      expect(wrapper.state().bikeList[0].name).to.equal("Litening C:68");
+      expect(wrapper.state().bikeList[0].description).to.equal("The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.");
+      nock.cleanAll();
+      done();
+    }, 1500);
   });
 });
