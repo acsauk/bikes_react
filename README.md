@@ -53,7 +53,7 @@ As the app did not fully meet the brief I have noted my thoughts behind achievin
 
 ### Persisting data
 
-I was researching on how best to persist data between sessions in react and there was a mix of views betrween using cookies or localStorage. In the end I decided to use localStorage as it would ensure the information was more up to date based on a users last sort selection. A useful node package to achieve this is [react-pstate]https://github.com/mgechev/react-pstate and it looked like this would meet the requirements of the brief.
+I was researching on how best to persist data between sessions in react and there was a mix of views betrween using cookies or localStorage. In the end I decided to use localStorage as it would ensure the information was more up to date based on a users last sort selection. A useful node package to achieve this is [react-pstate](https://github.com/mgechev/react-pstate) and it looked like this would meet the requirements of the brief.
 
 ### Filters
 
