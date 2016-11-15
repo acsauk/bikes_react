@@ -8,16 +8,17 @@ import SortComponent from '../lib/SortComponent';
 let bikeClasses;
 let wrapper;
 
-describe('<FilterComponent />', function() {
+describe('<SortComponent />', function() {
   beforeEach(function() {
-    bikeClasses = ["endurance","race","comfort"]
-    wrapper = mount(<SortComponent/>)
+    wrapper = mount(<SortComponent bikeClasses={["endurance","race","comfort"]} />)
   })
 
-  it('renders a dropdown box initially not populated', function() {
+  // Doesn't currently test for populated items as struggling with testing muicss components
+
+  it('renders a dropdown box populated with bike classes', function() {
     let dropdown = wrapper.find('.mui-dropdown')
-    expect(wrapper.state().bikeClasses).to.be.instanceof(Array);
-    expect(wrapper.state().bikeClasses.length).to.equal(0);
+    expect(wrapper.props().bikeClasses).to.be.instanceof(Array);
+    expect(wrapper.props().bikeClasses.length).to.equal(3);
     expect(dropdown.type()).to.equal('div');
   });
 });
