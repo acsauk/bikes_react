@@ -21,4 +21,7 @@ describe('<SortComponent />', function() {
     expect(wrapper.props().bikeClasses.length).to.equal(3);
     expect(dropdown.type()).to.equal('div');
   });
+
+  // Ran out of time to test for sorting functionality
+
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { mount, shallow } from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
@@ -77,4 +78,5 @@ describe('<App/>', function() {
       done();
     }, 1500);
   });
+
 });

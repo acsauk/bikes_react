@@ -1,6 +1,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {expect} from 'chai';
+import Container from 'muicss/lib/react/container';
+import Row from 'muicss/lib/react/row';
+import Col from 'muicss/lib/react/col';
 
 import BikeComponent from '../lib/BikeComponent';
 
@@ -17,23 +20,22 @@ describe('<BikeComponent/>', function () {
                               />);
   });
 
-  it('should display a bike name and description wrapped in paragraphs in a parent div', function() {
-    expect(wrapper.type()).to.equal('div');
-    expect(wrapper.hasClass('bike')).to.equal(true);
+  it('should display a bike name and description wrapped in paragraphs in a Container', function() {
+    expect(wrapper.type()).to.equal(Container);
 
-    let nameP = wrapper.childAt(0);
-    expect(nameP.type()).to.equal('p');
+    let nameP = wrapper.find('h3.bikeName');
+    expect(nameP.type()).to.equal('h3');
     expect(nameP.hasClass('bikeName')).to.equal(true);
     expect(nameP.text()).to.equal('Model: Litening C:68');
 
-    let descriptionP = wrapper.childAt(1);
+    let descriptionP = wrapper.find('p.bikeDescription');
     expect(descriptionP.type()).to.equal('p');
     expect(descriptionP.hasClass('bikeDescription')).to.equal(true);
-    expect(descriptionP.text()).to.equal('Description: The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.');
+    expect(descriptionP.text()).to.equal('The bike for the professionals - thanks to our high-end C:68 Carbon frame and race optimized geometry.');
   });
 
   it('displays the bike classes associated with the bike in a ul tag', function() {
-    let classUl = wrapper.childAt(3);
+    let classUl = wrapper.find('ul.bikeClass');
     expect(classUl.type()).to.equal('ul');
     expect(classUl.hasClass('bikeClass')).to.equal(true);
     expect(classUl.find('ul').children()).to.have.length(2);
@@ -42,7 +44,7 @@ describe('<BikeComponent/>', function () {
   });
 
   it('displays the bike image associated with the bike in an img tag', function() {
-    let imageImg = wrapper.childAt(4);
+    let imageImg = wrapper.find('img.bikeImage'); 
     let image = imageImg.find('img');
     expect(imageImg.type()).to.equal('img');
     expect(imageImg.hasClass('bikeImage')).to.equal(true);
